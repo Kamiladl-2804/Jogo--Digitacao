@@ -9,5 +9,18 @@ package br.edu.fei.model;
  * @author feispkluongo
  */
 public class Frase {
-    
+    private final String texto;
+
+    public Frase(String texto) {
+        this.texto = texto;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public boolean comparar(String digitado) {
+        return texto.equals(digitado);
+    }
+
 }

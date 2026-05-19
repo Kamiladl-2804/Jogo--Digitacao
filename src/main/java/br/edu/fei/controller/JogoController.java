@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.edu.fei.
+package br.edu.fei.controller;
 
 import br.edu.fei.model.Frase;
 import br.edu.fei.model.GerenciadorFrases;
@@ -17,8 +17,87 @@ import javax.swing.JOptionPane;
  */
 
 
-public class JogoController {
+public final class JogoController {
 
-    
+    private final GerenciadorFrases gerenciador;
+    private final ArrayList<Frase> frases;
+
+    private int indice;
+    private int score;
+
+    private final TelaDigitacao tela;
+
+    public JogoController(TelaDigitacao tela) {
+
+        this.tela = tela;
+
+        gerenciador = new GerenciadorFrases();
+
+        frases = gerenciador.getFrases();
+
+        indice = 0;
+        score = 0;
+
+        mostrarFrase();
+    }
+
+    public void mostrarFrase() {
+
+        if (indice < frases.size()) {
+
+            tela.setFrase(
+                    frases.get(indice).getTexto()
+            );
+
+        } else {
+
+            finalizarJogo();
+        }
+    }
+
+    public void verificarFrase(String digitado) {
+
+        Frase fraseAtual = frases.get(indice);
+
+        if (fraseAtual.comparar(digitado)) {
+
+            JOptionPane.showMessageDialog(
+                    tela,
+                    "Correto!"
+            );
+
+            score++;
+
+        } else {
+
+            JOptionPane.showMessageDialog(
+                    tela,
+                    "Errado!"
+            );
+        }
+
+        indice++;
+
+        tela.limparTexto();
+
+        mostrarFrase();
+    }
+
+    private void finalizarJogo() {
+
+        gerenciador.salvarRecorde(score);
+
+        int recorde = gerenciador.lerRecorde();
+
+        JOptionPane.showMessageDialog(
+                tela,
+                "Fim do jogo"
+                + "Score: " + score
+                + "\nRecorde: " + recorde
+        );
+
+        System.exit(0);
+    }
+
 }
 

@@ -4,12 +4,21 @@
  */
 package br.edu.fei.view;
 
+
+import br.edu.fei.controller.JogoController;
+
+import java.awt.Color;
+
+import java.awt.event.KeyEvent;
+
+
 /**
  *
  * @author andrezanon
  */
 public class TelaDigitacao extends javax.swing.JFrame {
-    
+    private final JogoController controller;
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaDigitacao.class.getName());
 
     /**
@@ -17,6 +26,40 @@ public class TelaDigitacao extends javax.swing.JFrame {
      */
     public TelaDigitacao() {
         initComponents();
+
+    controller = new JogoController(this);
+
+        getRootPane().setDefaultButton(confirmaBtn);
+
+        confirmaBtn.addMouseListener(
+                new java.awt.event.MouseAdapter() {
+
+            @Override
+            public void mouseEntered(
+                    java.awt.event.MouseEvent evt
+            ) {
+
+                String digitado =
+                        textoDigitadoArea.getText();
+
+                String frase =
+                        fraseLabel.getText();
+            }
+
+
+
+            @Override
+            public void mouseExited(
+                    java.awt.event.MouseEvent evt
+            ){
+            }
+        });
+
+        textoDigitadoArea.addKeyListener(
+                new java.awt.event.KeyAdapter() {
+
+        });
+
     }
 
     /**
@@ -97,7 +140,7 @@ public class TelaDigitacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmaBtnActionPerformed
-
+        controller.verificarFrase(textoDigitadoArea.getText());
     }//GEN-LAST:event_confirmaBtnActionPerformed
 
     /**
@@ -125,6 +168,15 @@ public class TelaDigitacao extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new TelaDigitacao().setVisible(true));
     }
 
+    public void setFrase(String frase) {
+
+        fraseLabel.setText(frase);
+    }
+
+    public void limparTexto() {
+
+        textoDigitadoArea.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmaBtn;
     private javax.swing.JLabel fraseLabel;
