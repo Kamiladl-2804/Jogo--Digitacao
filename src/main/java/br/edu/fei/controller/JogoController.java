@@ -92,7 +92,7 @@ public final class JogoController {
 
         JOptionPane.showMessageDialog(
                 tela,
-                "Fim do jogo"
+                "Fim do jogo\\n"
                 + "Score: " + score
                 + "\nRecorde: " + recorde
         );
