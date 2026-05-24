@@ -7,6 +7,7 @@ package br.edu.fei.controller;
 import br.edu.fei.model.Frase;
 import br.edu.fei.model.GerenciadorFrases;
 import br.edu.fei.view.TelaDigitacao;
+import java.awt.Color;
 
 import java.util.ArrayList;
 
@@ -97,6 +98,22 @@ public final class JogoController {
         );
 
         System.exit(0);
+    }
+    
+    public void verificarCor() {
+
+        Frase fraseAtual = frases.get(indice);
+
+        String digitado = tela.getTextoDigitado();
+
+        if (fraseAtual.comparar(digitado)) {
+
+            tela.mudarCorTexto(Color.GREEN);
+
+        } else {
+
+            tela.mudarCorTexto(Color.RED);
+        }
     }
 
 }

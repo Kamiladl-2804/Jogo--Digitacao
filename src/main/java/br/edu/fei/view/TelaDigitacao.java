@@ -38,7 +38,7 @@ public class TelaDigitacao extends javax.swing.JFrame {
             public void mouseEntered(
                     java.awt.event.MouseEvent evt
             ) {
-
+                controller.verificarCor();
                 String digitado =
                         textoDigitadoArea.getText();
 
@@ -56,8 +56,15 @@ public class TelaDigitacao extends javax.swing.JFrame {
         });
 
         textoDigitadoArea.addKeyListener(
-                new java.awt.event.KeyAdapter() {
+            new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
 
+                if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+
+                    evt.consume();
+                }
+            }
         });
 
     }
@@ -176,6 +183,16 @@ public class TelaDigitacao extends javax.swing.JFrame {
     public void limparTexto() {
 
         textoDigitadoArea.setText("");
+    }
+    
+   public void mudarCorTexto(Color cor) {
+
+        textoDigitadoArea.setForeground(cor);
+    }
+    
+    public String getTextoDigitado() {
+
+        return textoDigitadoArea.getText();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmaBtn;
