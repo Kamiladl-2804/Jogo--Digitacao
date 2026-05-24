@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author andrezanon
+ * @author kamil
  */
 public class TelaDigitacao extends javax.swing.JFrame {
     private final JogoController controller;
